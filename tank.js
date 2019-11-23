@@ -175,8 +175,17 @@ let downPressed = false;
 
 let helpX = Math.random() * (innerWidth - 300);
 let helpY = Math.random() * (innerWidth - 300);
-let helpDx = 1;
-let helpDy = 1;
+let helpDx = 2;
+let helpDy = 2;
+
+let help2X = Math.random() * (innerWidth - 300);
+let help2Y = Math.random() * (innerWidth - 300);
+
+let help3X = Math.random() * (innerWidth - 300);
+let help3Y = Math.random() * (innerWidth - 300);
+
+let help4X = Math.random() * (innerWidth - 300);
+let help4Y = Math.random() * (innerWidth - 300);
 
 var k = 0;
 
@@ -302,7 +311,7 @@ function animate(){
         k++;
     }
       
-    if (score > 250){
+    if (score > 50){
         ctx.drawImage(image2, helpX, helpY, 60, 60);
 
         helpX += helpDx;
@@ -319,48 +328,57 @@ function animate(){
     }
 
     if (score > 500){
-        ctx.drawImage(image2, helpX, helpY, 60, 60);
+        ctx.drawImage(image2, help2X, help2Y, 60, 60);
 
-        helpX += helpDx;
-        helpY += helpDy;
+        helpDx = 2;
+        helpDy = 2;
+
+        help2X += helpDx;
+        help2Y += helpDy;
         
-        if(helpX > gunX && helpX < gunX + gunW && helpY > gunY && helpY < gunY + gunH){
+        if(help2X > gunX && help2X < gunX + gunW && help2Y > gunY && help2Y < gunY + gunH){
             lives++;
 
-            helpX = -100;
-            helpY = -100;
+            help2X = -100;
+            help2Y = -100;
             helpDx = 0;
             helpDy = 0;
         }
     }
 
     if (score > 750){
-        ctx.drawImage(image2, helpX, helpY, 60, 60);
+        ctx.drawImage(image2, help3X, help3Y, 60, 60);
 
-        helpX += helpDx;
-        helpY += helpDy;
+        helpDx = 2;
+        helpDy = 2;
+
+        help3X += helpDx;
+        help3Y += helpDy;
         
-        if(helpX > gunX && helpX < gunX + gunW && helpY > gunY && helpY < gunY + gunH){
+        if(help3X > gunX && help3X < gunX + gunW && help3Y > gunY && help3Y < gunY + gunH){
             lives++;
 
-            helpX = -100;
-            helpY = -100;
+            help3X = -100;
+            help3Y = -100;
             helpDx = 0;
             helpDy = 0;
         }
     }
 
     if (score > 1000){
-        ctx.drawImage(image2, helpX, helpY, 60, 60);
+        ctx.drawImage(image2, help4X, help4Y, 60, 60);
 
-        helpX += helpDx;
-        helpY += helpDy;
+        helpDx = 2;
+        helpDy = 2;
+
+        help4X += helpDx;
+        help4Y += helpDy;
         
-        if(helpX > gunX && helpX < gunX + gunW && helpY > gunY && helpY < gunY + gunH){
+        if(help4X > gunX && help4X < gunX + gunW && help4Y > gunY && help4Y < gunY + gunH){
             lives++;
 
-            helpX = -100;
-            helpY = -100;
+            help4X = -100;
+            help4Y = -100;
             helpDx = 0;
             helpDy = 0;
         }

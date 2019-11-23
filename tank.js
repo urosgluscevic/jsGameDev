@@ -22,6 +22,22 @@ image.src = "space.jpeg";
 let image2 = new Image(); //životi
 image2.src = "heart.png";
 
+let image3 = new Image();
+image3.src = "spaceship.png";
+
+let image4 = new Image();
+image4.src = "ss5.png"
+
+let image5 = new Image();
+image5.src = "bullet.png"
+
+let audio = new Audio();
+audio.src = "song.mp3";
+
+function song() {
+    audio.play();
+} 
+
 function Rectangle (x, y, width, height, dx, dy) { //protivnički svemirski brodovi
     this.x = x;
     this.y = y;
@@ -31,10 +47,11 @@ function Rectangle (x, y, width, height, dx, dy) { //protivnički svemirski brod
     this.dy = dy;
 
     this.draw = function() {
-        ctx.fillStyle = "red";
-        ctx.strokeStyle = "black"
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-        ctx.strokeRect(this.x, this.y, this.width, this.height)
+        //ctx.fillStyle = "red";
+        //ctx.strokeStyle = "black"
+        //ctx.fillRect(this.x, this.y, this.width, this.height);
+        //ctx.strokeRect(this.x, this.y, this.width, this.height)
+        ctx.drawImage(image4, this.x, this.y, this.width, this.height)
     }
 
     this.update = function() {
@@ -53,7 +70,7 @@ function Rectangle (x, y, width, height, dx, dy) { //protivnički svemirski brod
 
         this.y += this.dy;
 
-        if(b1x > this.x && b1x < this.x + this.width && b1y > this.y && b1y < this.y + this.height){ //detekcija sudara sa prvim metkom
+        if(b1x + (b1w / 2) > this.x && (b1x + b1w / 2) < this.x + this.width && b1y > this.y && b1y < this.y + this.height){ //detekcija sudara sa prvim metkom
             this.y = (Math.random() + 1) * - 350;
             this.x = Math.random() * (innerWidth - 2 * width) + width; 
             b1x = gunX + gunW / 2;
@@ -61,11 +78,11 @@ function Rectangle (x, y, width, height, dx, dy) { //protivnički svemirski brod
             score++;   
 
             if(score > 80){
-                this.dy = this.dy + 0.1; //treci level, svaki put nakon unistenja, protivnici ubrzaju
+                this.dy = this.dy + 0.002; //treci level, svaki put nakon unistenja, protivnici ubrzaju
             }
         }
 
-        if(b0x > this.x && b0x < this.x + this.width && b0y > this.y && b0y < this.y + this.height){ //sudar sa drugim metkom
+        if(b0x + (b1w / 2) > this.x && b0x + (b1w / 2) < this.x + this.width && b0y > this.y && b0y < this.y + this.height){ //sudar sa drugim metkom
             this.y = (Math.random() + 1) * - 350;
             this.x = Math.random() * (innerWidth - 2 * width) + width; 
             b0x = gunX;
@@ -73,11 +90,11 @@ function Rectangle (x, y, width, height, dx, dy) { //protivnički svemirski brod
             score++;
 
             if(score > 80){
-                this.dy = this.dy + 0.1;
+                this.dy = this.dy + 0.002;
             }
         }
 
-        if(b2x > this.x && b2x < this.x + this.width && b2y > this.y && b2y < this.y + this.height){ //sudar sa trecim metkom
+        if(b2x + (b1w / 2) > this.x && b2x + (b1w / 2) < this.x + this.width && b2y > this.y && b2y < this.y + this.height){ //sudar sa trecim metkom
             this.y = (Math.random() + 1) * - 350;
             this.x = Math.random() * (innerWidth - 2 * width) + width; 
             b2x = gunX + gunW;
@@ -85,7 +102,7 @@ function Rectangle (x, y, width, height, dx, dy) { //protivnički svemirski brod
             score++;
 
             if(score > 80){
-                this.dy = this.dy + 0.1;
+                this.dy = this.dy + 0.002;
             }
         }
 
@@ -127,25 +144,27 @@ for (var i = 0; i < 10; i++) { //dodavanje vrijednosti za protivnikove koordinat
 let gunX = canvas.height; //igracev svemirski brod
 let gunY = canvas.width / 2;
 let gunW = 80;
-let gunH = 40;
+let gunH = 60;
 let gunDx = 15;
 let gunDy = 15;
 
 let b1x; //prvi metak
 let b1y;
-let b1dy = 33;
+let b1dy = 40;
 let b1rad = 10;
 let b1yOriginal;
+let b1w = 10;
+let b1h = 40;
 
 let b2x; //drugi metak
 let b2y;
-let b2dy = 30;
+let b2dy = 40;
 let b2rad = 10;
 let b2yOriginal;
 
 let b0x; //treci metak
 let b0y;
-let b0dy = 30;
+let b0dy = 40;
 let b0rad = 10;
 let b0yOriginal;
 
@@ -153,6 +172,11 @@ let leftPressed = false; //kretanje igraca
 let rightPressed = false;
 let upPressed = false;
 let downPressed = false;
+
+let helpX = Math.random() * (innerWidth - 300);
+let helpY = Math.random() * (innerWidth - 300);
+let helpDx = 1;
+let helpDy = 1;
 
 var k = 0;
 
@@ -176,17 +200,17 @@ function animate(){
 
     ctx.drawImage(image, 0, 0, innerWidth, innerHeight);
 
-    drawGun();
+    ctx.drawImage(image3, gunX, gunY, gunW, gunH)
     drawScore();
 
     if(lives > 0){ //smanjivanje broja zivota
-        ctx.drawImage(image2, innerWidth - 50, 20, 45, 45)
+        ctx.drawImage(image2, innerWidth - 75, 40, 60, 60)
     }
     if(lives > 1){
-        ctx.drawImage(image2, innerWidth - 100, 20, 45, 45)
+        ctx.drawImage(image2, innerWidth - 150, 40, 60, 60)
     }
     if(lives > 2){
-        ctx.drawImage(image2, innerWidth - 150, 20, 45, 45)
+        ctx.drawImage(image2, innerWidth - 225, 40, 60, 60)
     }
 
     if(score > 20){ //igracu se daje mala prednost u drugom nivou
@@ -220,8 +244,6 @@ function animate(){
             gunY = canvas.height - gunH;
         }
     }
-
-    
     
     if(k === 0){ //brojac k ce samo na pocetku biti jednak 0, da bi metak pri prvom ispaljivanju imao iste koordinate kao spaceship
         b1x = gunX + gunW / 2; //na prvom nivou igrac ima samo 1 metak koji se konstantno ispaljuje
@@ -237,26 +259,32 @@ function animate(){
         b2y = b1y;
     }
 
-    if(b1y - b1rad > 0){
-        ctx.beginPath();
-        ctx.arc(b1x, b1y, b1rad, 0, Math.PI * 2, false)
-        ctx.fillStyle = "blue";
-        ctx.fill();
+    if(b1y > 0){
+        //ctx.beginPath();
+        //ctx.arc(b1x, b1y, b1rad, 0, Math.PI * 2, false)
+        //ctx.fillStyle = "blue";
+        //ctx.fill();
+
+        ctx.drawImage(image5, b1x, b1y, b1w, b1h);
 
         b1y -= b1dy; //animirnje metaka
 
         if(score > 20){
-            ctx.beginPath();
-            ctx.arc(b0x, b0y, b0rad, 0, Math.PI * 2, false)
-            ctx.fillStyle = "blue";
-            ctx.fill();
+            //ctx.beginPath();
+            //ctx.arc(b0x, b0y, b0rad, 0, Math.PI * 2, false)
+            //ctx.fillStyle = "blue";
+            //ctx.fill();
+            ctx.drawImage(image5, b2x, b2y, b1w, b1h);
+
 
             b0y -= b0dy;
 
-            ctx.beginPath();
-            ctx.arc(b2x, b2y, b2rad, 0, Math.PI * 2, false)
-            ctx.fillStyle = "blue";
-            ctx.fill();
+            //ctx.beginPath();
+            //ctx.arc(b2x, b2y, b2rad, 0, Math.PI * 2, false)
+            //ctx.fillStyle = "blue";
+            //ctx.fill();
+            ctx.drawImage(image5, b0x, b0y, b1w, b1h);
+
 
             b2y -= b2dy;
         }
@@ -274,14 +302,77 @@ function animate(){
         k++;
     }
       
-      
+    if (score > 250){
+        ctx.drawImage(image2, helpX, helpY, 60, 60);
+
+        helpX += helpDx;
+        helpY += helpDy;
+        
+        if(helpX > gunX && helpX < gunX + gunW && helpY > gunY && helpY < gunY + gunH){
+            lives++;
+
+            helpX = -100;
+            helpY = -100;
+            helpDx = 0;
+            helpDy = 0;
+        }
+    }
+
+    if (score > 500){
+        ctx.drawImage(image2, helpX, helpY, 60, 60);
+
+        helpX += helpDx;
+        helpY += helpDy;
+        
+        if(helpX > gunX && helpX < gunX + gunW && helpY > gunY && helpY < gunY + gunH){
+            lives++;
+
+            helpX = -100;
+            helpY = -100;
+            helpDx = 0;
+            helpDy = 0;
+        }
+    }
+
+    if (score > 750){
+        ctx.drawImage(image2, helpX, helpY, 60, 60);
+
+        helpX += helpDx;
+        helpY += helpDy;
+        
+        if(helpX > gunX && helpX < gunX + gunW && helpY > gunY && helpY < gunY + gunH){
+            lives++;
+
+            helpX = -100;
+            helpY = -100;
+            helpDx = 0;
+            helpDy = 0;
+        }
+    }
+
+    if (score > 1000){
+        ctx.drawImage(image2, helpX, helpY, 60, 60);
+
+        helpX += helpDx;
+        helpY += helpDy;
+        
+        if(helpX > gunX && helpX < gunX + gunW && helpY > gunY && helpY < gunY + gunH){
+            lives++;
+
+            helpX = -100;
+            helpY = -100;
+            helpDx = 0;
+            helpDy = 0;
+        }
+    }
 
     for (var i = 0; i < array.length; i++) {
         array[i].update(); //crtanje i animiranje protivnika
     } 
 }
 
-setTimeout(animate, 6000);
+setTimeout(song, 5000)
+setTimeout(animate, 3000);
 
 document.addEventListener("keydown", keyDownHandler) //event listeneri za kretanje igraca pomocu strelica
 document.addEventListener("keyup", keyUpHandler)

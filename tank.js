@@ -173,19 +173,25 @@ let rightPressed = false;
 let upPressed = false;
 let downPressed = false;
 
-let helpX = Math.random() * (innerWidth - 300);
-let helpY = Math.random() * (innerWidth - 300);
+let helpX = Math.random() * (innerWidth - 500);
+let helpY = Math.random() * (innerWidth - 500);
 let helpDx = 2;
 let helpDy = 2;
 
-let help2X = Math.random() * (innerWidth - 300);
-let help2Y = Math.random() * (innerWidth - 300);
+let help2X = Math.random() * (innerWidth - 500);
+let help2Y = Math.random() * (innerWidth - 500);
+let help2Dx = 2;
+let help2Dy = 2;
 
-let help3X = Math.random() * (innerWidth - 300);
-let help3Y = Math.random() * (innerWidth - 300);
+let help3X = Math.random() * (innerWidth - 500);
+let help3Y = Math.random() * (innerWidth - 500);
+let help3Dx = 2;
+let help3Dy = 2;
 
-let help4X = Math.random() * (innerWidth - 300);
-let help4Y = Math.random() * (innerWidth - 300);
+let help4X = Math.random() * (innerWidth - 500);
+let help4Y = Math.random() * (innerWidth - 500);
+let help4Dx = 2;
+let help4Dy = 2;
 
 var k = 0;
 
@@ -311,7 +317,7 @@ function animate(){
         k++;
     }
       
-    if (score > 50){
+    if (score > 250){
         ctx.drawImage(image2, helpX, helpY, 60, 60);
 
         helpX += helpDx;
@@ -330,57 +336,48 @@ function animate(){
     if (score > 500){
         ctx.drawImage(image2, help2X, help2Y, 60, 60);
 
-        helpDx = 2;
-        helpDy = 2;
-
-        help2X += helpDx;
-        help2Y += helpDy;
+        help2X += help2Dx;
+        help2Y += help2Dy;
         
         if(help2X > gunX && help2X < gunX + gunW && help2Y > gunY && help2Y < gunY + gunH){
             lives++;
 
             help2X = -100;
             help2Y = -100;
-            helpDx = 0;
-            helpDy = 0;
+            help2Dx = 0;
+            help2Dy = 0;
         }
     }
 
     if (score > 750){
         ctx.drawImage(image2, help3X, help3Y, 60, 60);
 
-        helpDx = 2;
-        helpDy = 2;
-
-        help3X += helpDx;
-        help3Y += helpDy;
+        help3X += help3Dx;
+        help3Y += help3Dy;
         
         if(help3X > gunX && help3X < gunX + gunW && help3Y > gunY && help3Y < gunY + gunH){
             lives++;
 
             help3X = -100;
             help3Y = -100;
-            helpDx = 0;
-            helpDy = 0;
+            help3Dx = 0;
+            help3Dy = 0;
         }
     }
 
     if (score > 1000){
         ctx.drawImage(image2, help4X, help4Y, 60, 60);
 
-        helpDx = 2;
-        helpDy = 2;
-
-        help4X += helpDx;
-        help4Y += helpDy;
+        help4X += help4Dx;
+        help4Y += help4Dy;
         
         if(help4X > gunX && help4X < gunX + gunW && help4Y > gunY && help4Y < gunY + gunH){
             lives++;
 
             help4X = -100;
             help4Y = -100;
-            helpDx = 0;
-            helpDy = 0;
+            help4Dx = 0;
+            help4Dy = 0;
         }
     }
 

@@ -47,10 +47,6 @@ function Rectangle (x, y, width, height, dx, dy) { //protivnički svemirski brod
     this.dy = dy;
 
     this.draw = function() {
-        //ctx.fillStyle = "red";
-        //ctx.strokeStyle = "black"
-        //ctx.fillRect(this.x, this.y, this.width, this.height);
-        //ctx.strokeRect(this.x, this.y, this.width, this.height)
         ctx.drawImage(image4, this.x, this.y, this.width, this.height)
     }
 
@@ -275,31 +271,16 @@ function animate(){
     }
 
     if(b1y > 0){
-        //ctx.beginPath();
-        //ctx.arc(b1x, b1y, b1rad, 0, Math.PI * 2, false)
-        //ctx.fillStyle = "blue";
-        //ctx.fill();
-
         ctx.drawImage(image5, b1x, b1y, b1w, b1h);
 
         b1y -= b1dy; //animirnje metaka
 
         if(score > 20){
-            //ctx.beginPath();
-            //ctx.arc(b0x, b0y, b0rad, 0, Math.PI * 2, false)
-            //ctx.fillStyle = "blue";
-            //ctx.fill();
             ctx.drawImage(image5, b2x, b2y, b1w, b1h);
-
 
             b0y -= b0dy;
 
-            //ctx.beginPath();
-            //ctx.arc(b2x, b2y, b2rad, 0, Math.PI * 2, false)
-            //ctx.fillStyle = "blue";
-            //ctx.fill();
             ctx.drawImage(image5, b0x, b0y, b1w, b1h);
-
 
             b2y -= b2dy;
         }
